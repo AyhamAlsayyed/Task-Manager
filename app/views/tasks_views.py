@@ -1,11 +1,12 @@
 from datetime import datetime
 
 from django.contrib.auth.models import User
+from django.db import transaction
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
 
-from app.models import Comment, Task
+from app.models import Comment, Notification, Task
 
 
 def tasks_view(request):
@@ -116,7 +117,14 @@ def create_comment_view(request, task_id):
         error_message = "Comment text is required"
         return render(request, "app/task.html", task_context(task, error_message, anchor))
 
-    Comment.objects.create(task=task, author=request.user, comment=comment_text)
+    with transaction.atomic():
+        Comment.objects.create(task=task, author=request.user, comment=comment_text)
+        Notification.objects.create(
+            user=task.user,
+            task=task,
+            message=f"New comment on task: {task.title}, in project: {task.project.title}",
+        )
+
     return redirect(reverse("app:task", args=[task_id]))
 
 
@@ -124,3 +132,10 @@ def delete_comment_view(request, task_id, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id)
     comment.delete()
     return redirect(reverse("app:task", args=[task_id]))
+
+
+def mark_notification_read_view(request, notification_id):
+    notification = get_object_or_404(Notification, pk=notification_id, user=request.user)
+    notification.is_read = True
+    notification.save()
+    return redirect(reverse("app:task", args=[notification.task.id]))
