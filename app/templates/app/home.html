@@ -17,6 +17,26 @@
 
   </section>
 
+{% if user.is_authenticated %}
+<section class="notifications">
+  <h2>Recent Notifications</h2>
+    {% if notifications %}
+      <ul>
+        {% for notification in notifications %}
+          <li {% if not notification.is_read %}class="unread"{% endif %}>
+            <a href="{% url 'app:mark_notification_read' notification.id %}">
+              {{ notification.message }}
+            </a>
+            <small>{{ notification.created_at|date:"M d, Y H:i" }}</small>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No notifications.</p>
+    {% endif %}
+</section>
+{% endif %}
+
   <section class="features">
     <div class="container">
       <div class="feature-cards">
