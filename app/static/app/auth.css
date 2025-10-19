@@ -1,0 +1,117 @@
+body {
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    background-color: white;
+    padding: 10px;
+    border-radius: 12px;
+    width: 360px;
+    text-align: center;
+}
+
+h1, h2 {
+    margin-bottom: 15px;
+    color: #2f3640;
+}
+
+.input-container {
+    display: block;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    display: block;
+    width: 90%;
+    padding: 10px;
+    border: 2px solid lightgray;
+    border-radius: 8px;
+    margin: 5px auto;
+    font-size: 15px;
+}
+
+input:focus {
+    border-color: #2f3640;
+    outline: none;
+}
+
+button, .btn {
+    display: block;
+    width: 96.5%;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 5px auto;
+    background: #2f3640;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+button:hover, .btn:hover {
+    background: #272b34;
+}
+
+a {
+    display: block;
+    margin: 12px 0;
+    color: #2f3640;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover {
+    color: #13151b;
+    text-decoration: underline;
+}
+
+.signup {
+    width: 50%;
+    display: block;
+    margin: 12px auto;
+    background: white;
+    color: #2f3640;
+    border: 2px solid #2f3640;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.signup:hover {
+    background: #2f3640;
+    color: white;
+}
+
+p {
+    font-size: 14px;
+    color: #2f3640;
+    margin-bottom: 15px;
+}
+
+.success-msg {
+    background-color: rgb(230, 255, 250);
+    border: 1px solid rgb(45, 212, 191);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    color: rgb(15, 118, 110);
+}
+
+.error-msg {
+    background-color: rgb(254, 226, 226);
+    border: 1px solid rgb(248, 113, 113);
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    color: rgb(185, 28, 28);
+}
